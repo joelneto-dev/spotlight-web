@@ -1,73 +1,30 @@
-@import url("https://api.fontshare.com/v2/css?f[]=clash-display@400&f[]=clash-display@500&f[]=clash-display@600&f[]=clash-display@700&display=swap");
 @import "tailwindcss";
 
-/* ============================================================
-   SPOTLIGHT DESIGN SYSTEM — CSS Variables
-   Mantém consistência com o app Flutter:
-   - dark background: #09090B (zinc-950)
-   - light background: #FAFAFA (zinc-50)
-   - accent: #FFFFFF / #000000 (preto e branco puros)
-   - Logo: círculo holofote, sem cores além de P&B
-   ============================================================ */
-
 :root {
-  /* Background layers */
   --bg-base: #09090b;
-  --bg-surface: #111113;
+  --bg-surface: #101014;
   --bg-elevated: #18181b;
   --bg-border: #27272a;
-
-  /* Text */
   --text-primary: #fafafa;
   --text-secondary: #a1a1aa;
   --text-muted: #52525b;
-
-  /* Accent — spotlight beam effect in blue */
-  --accent-white: #ffffff;
-  --accent-glow: rgba(37, 99, 235, 0.08);
-  --accent-glow-strong: rgba(37, 99, 235, 0.15);
-
-  /* Glass */
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-
-  /* Gradient definitions */
-  --gradient-hero: radial-gradient(
-    ellipse 80% 60% at 50% -20%,
-    rgba(37, 99, 235, 0.15) 0%,
-    transparent 60%
-  );
-  --gradient-section: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(37, 99, 235, 0.03) 50%,
-    transparent 100%
-  );
-  --gradient-cta: radial-gradient(
-    ellipse 60% 40% at 50% 50%,
-    rgba(37, 99, 235, 0.1) 0%,
-    transparent 70%
-  );
-
-  /* Spacing scale */
-  --section-padding-y: clamp(5rem, 10vw, 9rem);
-  --section-padding-x: clamp(1.5rem, 5vw, 6rem);
-
-  /* Typography scale */
-  --font-display: var(--font-inter), sans-serif;
+  --accent-blue: #2563eb;
+  --accent-blue-soft: rgba(37, 99, 235, 0.14);
+  --accent-blue-faint: rgba(37, 99, 235, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-shadow: 0 22px 70px rgba(0, 0, 0, 0.45);
+  --gradient-hero: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.22), transparent 42%),
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.09), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 48%);
+  --section-padding-y: clamp(5rem, 9vw, 8rem);
+  --section-padding-x: clamp(1.25rem, 4vw, 4rem);
   --font-body: var(--font-inter), sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
-
-  /* Transitions */
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast: 200ms;
-  --duration-normal: 400ms;
-  --duration-slow: 700ms;
 }
 
-/* Light mode overrides — preparado para next-themes */
 [data-theme="light"] {
   --bg-base: #fafafa;
   --bg-surface: #f4f4f5;
@@ -76,13 +33,9 @@
   --text-primary: #09090b;
   --text-secondary: #52525b;
   --text-muted: #a1a1aa;
-  --glass-bg: rgba(0, 0, 0, 0.03);
+  --glass-bg: rgba(0, 0, 0, 0.035);
   --glass-border: rgba(0, 0, 0, 0.08);
 }
-
-/* ============================================================
-   BASE STYLES
-   ============================================================ */
 
 *,
 *::before,
@@ -96,62 +49,62 @@ html {
 }
 
 body {
-  background-color: var(--bg-base);
+  overflow-x: hidden;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    var(--bg-base);
+  background-size: 72px 72px;
   color: var(--text-primary);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
-/* Selection */
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  content: "";
+  opacity: 0.36;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
 ::selection {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(37, 99, 235, 0.42);
   color: var(--text-primary);
 }
 
-/* Scrollbar estilizado */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-base);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-border);
-  border-radius: 3px;
+  border-radius: 999px;
+  background: #3f3f46;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: #71717a;
 }
 
-/* Focus visible acessível */
 :focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: 2px solid rgba(255, 255, 255, 0.62);
+  outline-offset: 3px;
+  border-radius: 8px;
 }
-
-/* Noise texture overlay sutil */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.4;
-}
-
-/* ============================================================
-   UTILITY CLASSES CUSTOMIZADAS
-   ============================================================ */
 
 .glass {
-  background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .spotlight-glow {
@@ -159,22 +112,27 @@ body::before {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #ffffff 30%, #3b82f6 100%);
+  background: linear-gradient(135deg, #ffffff 20%, #93c5fd 52%, #2563eb 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .section-base {
   padding: var(--section-padding-y) var(--section-padding-x);
 }
 
-/* Reduced motion */
+.film-grain-mask {
+  mask-image: linear-gradient(to bottom, transparent, black 16%, black 86%, transparent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

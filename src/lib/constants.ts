@@ -16,28 +16,28 @@ export const SITE_CONFIG = {
       name: "Andrei Silva de Oliveira",
       ra: "204010",
       role: "Dev Mobile & UI/UX",
-      linkedin: "#", // TODO: Preencher com LinkedIn real (ex: https://linkedin.com/in/nome)
+      linkedin: "#",
       github: "https://github.com/joeljoao/spotlight",
     },
     {
       name: "Joel João de Araujo Neto",
       ra: "204244",
       role: "Arquiteto & Dev Full Stack",
-      linkedin: "#", // TODO: Preencher com LinkedIn real
+      linkedin: "#",
       github: "https://github.com/joeljoao",
     },
     {
       name: "Luan Henrique Ferreira",
       ra: "204267",
       role: "Dev Backend & Banco de Dados",
-      linkedin: "#", // TODO: Preencher com LinkedIn real
+      linkedin: "#",
       github: "https://github.com/joeljoao/spotlight",
     },
     {
       name: "Miguel Vinhado",
       ra: "204572",
       role: "Dev IA & NLP Specialist",
-      linkedin: "#", // TODO: Preencher com LinkedIn real
+      linkedin: "#",
       github: "https://github.com/joeljoao/spotlight",
     },
   ],
@@ -45,6 +45,6 @@ export const SITE_CONFIG = {
 
 export const NAV_LINKS = [
   { href: "/sobre", label: "Sobre" },
-  { href: "/como-funciona", label: "Como Funciona" },
+  { href: "/como-funciona", label: "Como funciona" },
   { href: "/equipe", label: "Equipe" },
 ] as const;

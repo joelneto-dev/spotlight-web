@@ -1,108 +1,109 @@
 "use client";
 
 import React from "react";
-import { motion, Variants } from "framer-motion";
-import { Search, Database, Cpu, Heart, MessageSquare, Moon } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+import { Cpu, Database, Heart, MessageSquare, Moon, Search } from "lucide-react";
 import { Section } from "@/components/layout/Section";
-import { Badge, GlassCard } from "@/components/ui";
+import { GlassCard } from "@/components/ui";
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: index * 0.07, duration: 0.5, ease: "easeOut" },
+  }),
+};
 
 export function FeaturesSection() {
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
   const features = [
     {
-      icon: Search,
-      title: "Busca Semântica",
-      description:
-        "Escreva de forma natural, como se estivesse conversando com um atendente de locadora experiente.",
-    },
-    {
       icon: Database,
-      title: "Base de Dados TMDB",
-      description:
-        "Integração instantânea com dados atualizados de mais de 800 mil títulos de filmes do The Movie Database.",
+      title: "Base TMDb",
+      description: "Metadados, sinopses, elenco, capas e informações de catálogo.",
     },
     {
       icon: Cpu,
-      title: "IA Inteligente",
-      description:
-        "Modelos avançados interpretam as nuances do seu pedido e buscam correlações e significados ocultos.",
+      title: "IA inteligente",
+      description: "Interpretação de nuances, atmosfera e intenção do pedido.",
     },
     {
       icon: Heart,
-      title: "Lista de Favoritos",
-      description:
-        "Salve as melhores recomendações direto no seu perfil para organizar o que quer assistir depois.",
+      title: "Favoritos",
+      description: "Listas pessoais para guardar o que você quer assistir depois.",
     },
     {
       icon: MessageSquare,
-      title: "Chat Conversacional",
-      description:
-        "Converse ativamente com o Spotlight para refinar buscas ou sugerir filmes com dinâmicas de feedback.",
+      title: "Chat conversacional",
+      description: "Refine a busca sem reiniciar o processo de descoberta.",
     },
     {
       icon: Moon,
-      title: "Dark Mode por Padrão",
-      description:
-        "Estética refinada e interface adaptada para telas escuras, ideal para o consumo de cinema à noite.",
+      title: "Dark por padrão",
+      description: "Interface pensada para uso confortável à noite.",
     },
   ];
 
   return (
-    <Section id="funcionalidades" className="border-t border-white/[0.02] py-24">
-      <div className="mb-16 flex flex-col items-center gap-4 text-center">
-        <Badge variant="outline">Funcionalidades</Badge>
-        <h2 className="font-display max-w-2xl text-3xl leading-tight font-semibold tracking-tight text-white sm:text-5xl">
-          Tudo o que você precisa para decidir o que ver.
-        </h2>
-        <p className="mt-2 max-w-lg text-sm text-neutral-400 sm:text-base">
-          Ferramentas modernas projetadas especificamente para resolver a fadiga de decisão dos
-          cinéfilos.
+    <Section id="funcionalidades" className="border-t border-white/[0.04] py-24">
+      <div className="mb-14 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="max-w-2xl">
+          <h2 className="font-display text-4xl leading-tight font-semibold text-white sm:text-5xl">
+            Ferramentas para sair da dúvida e ir para o play.
+          </h2>
+        </div>
+        <p className="max-w-md text-base leading-7 text-neutral-400">
+          Cada recurso foi pensado para remover uma pequena fricção da experiência de escolher algo
+          para assistir.
         </p>
       </div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="relative z-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-      >
-        {features.map((feature, index) => (
-          <motion.div key={index} variants={cardVariants}>
-            <GlassCard
-              hover
-              className="flex h-full flex-col gap-4 border border-white/5 bg-white/[0.02] p-8"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] text-neutral-400 transition-colors duration-300 group-hover:text-white">
-                <feature.icon size={20} />
-              </div>
-              <h3 className="font-display text-lg font-medium tracking-wide text-white">
-                {feature.title}
-              </h3>
-              <p className="text-sm leading-relaxed font-light text-neutral-400">
-                {feature.description}
+      <div className="grid gap-5 lg:grid-cols-[1.1fr_1fr]">
+        <GlassCard className="relative min-h-[420px] overflow-hidden p-7 sm:p-9">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,rgba(37,99,235,0.24),transparent_34%)]" />
+          <div className="relative z-10 flex h-full flex-col justify-between gap-10">
+            <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-white text-black">
+              <Search size={26} />
+            </div>
+            <div>
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-blue-200">
+                recurso central
               </p>
-            </GlassCard>
-          </motion.div>
-        ))}
-      </motion.div>
+              <h3 className="mt-3 font-display text-4xl font-semibold text-white">
+                Busca semântica
+              </h3>
+              <p className="mt-4 max-w-xl text-base leading-8 text-neutral-300">
+                Escreva como se estivesse falando com alguém que entende cinema: “quero algo
+                melancólico, bonito, com mistério e final marcante”. O Spotlight entende o contexto
+                e entrega sugestões coerentes.
+              </p>
+            </div>
+          </div>
+        </GlassCard>
+
+        <div className="grid gap-5 sm:grid-cols-2">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={cardVariants}
+            >
+              <GlassCard hover className="flex h-full flex-col gap-4 p-5">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-blue-200">
+                  <feature.icon size={18} />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold text-white">{feature.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-neutral-400">{feature.description}</p>
+                </div>
+              </GlassCard>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </Section>
   );
 }

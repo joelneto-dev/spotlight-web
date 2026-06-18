@@ -9,11 +9,11 @@ interface BadgeProps {
 
 export function Badge({ children, variant = "outline", className }: BadgeProps) {
   const baseStyles =
-    "inline-flex items-center rounded-full px-3.5 py-1 text-[10px] font-bold tracking-wider uppercase transition-all duration-300 select-none";
+    "inline-flex items-center rounded-full px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] transition-all duration-300 select-none";
 
   const variants = {
-    outline: "border border-white/10 bg-white/[0.03] text-neutral-300 backdrop-blur-md",
-    solid: "bg-white/10 text-white backdrop-blur-md hover:bg-white/15",
+    outline: "border border-white/10 bg-white/[0.035] text-neutral-300 backdrop-blur-md",
+    solid: "bg-white text-black shadow-[0_0_24px_rgba(255,255,255,0.14)]",
   };
 
   return <span className={cn(baseStyles, variants[variant], className)}>{children}</span>;

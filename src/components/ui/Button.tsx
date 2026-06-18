@@ -32,20 +32,20 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-full transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
+    "inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:pointer-events-none disabled:opacity-50";
 
   const variants = {
     primary:
-      "bg-[#2563EB] text-white hover:bg-[#1D4ED8] hover:shadow-[0_0_20px_rgba(37,99,235,0.35)] active:scale-[0.98]",
+      "bg-white text-black shadow-[0_0_28px_rgba(255,255,255,0.16)] hover:bg-blue-50 hover:shadow-[0_0_34px_rgba(37,99,235,0.35)] active:scale-[0.98]",
     secondary:
-      "border border-white/10 bg-white/5 text-white hover:bg-white/10 hover:border-white/20 active:scale-[0.98]",
-    ghost: "text-neutral-400 hover:text-white hover:bg-white/5 active:scale-[0.98]",
+      "border border-white/[0.12] bg-white/[0.055] text-white hover:border-white/[0.24] hover:bg-white/[0.09] active:scale-[0.98]",
+    ghost: "text-neutral-400 hover:bg-white/[0.06] hover:text-white active:scale-[0.98]",
   };
 
   const sizes = {
     sm: "px-4 py-1.5 text-xs",
-    md: "px-6 py-2.5 text-sm",
-    lg: "px-8 py-3.5 text-base",
+    md: "px-5 py-2.5 text-sm",
+    lg: "px-7 py-3.5 text-base",
   };
 
   const combinedClasses = cn(baseStyles, variants[variant], sizes[size], className);
@@ -65,6 +65,7 @@ export function Button({
         </a>
       );
     }
+
     return (
       <Link
         href={href}

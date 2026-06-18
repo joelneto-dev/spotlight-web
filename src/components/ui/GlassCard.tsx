@@ -11,28 +11,23 @@ interface GlassCardProps {
 }
 
 export function GlassCard({ children, className, hover = false }: GlassCardProps) {
+  const classes = cn("glass relative overflow-hidden rounded-lg p-6", className);
+
   if (hover) {
     return (
       <motion.div
         whileHover={{
-          scale: 1.02,
-          borderColor: "rgba(255, 255, 255, 0.15)",
-          boxShadow: "0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.03)",
+          y: -6,
+          borderColor: "rgba(255, 255, 255, 0.18)",
+          boxShadow: "0 26px 80px rgba(0, 0, 0, 0.52), 0 0 34px rgba(37, 99, 235, 0.09)",
         }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className={cn(
-          "glass relative overflow-hidden rounded-2xl p-6 transition-colors duration-300",
-          className
-        )}
+        transition={{ duration: 0.28, ease: "easeOut" }}
+        className={classes}
       >
         {children}
       </motion.div>
     );
   }
 
-  return (
-    <div className={cn("glass relative overflow-hidden rounded-2xl p-6", className)}>
-      {children}
-    </div>
-  );
+  return <div className={classes}>{children}</div>;
 }

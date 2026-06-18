@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from "next/server";
 /**
  * TODO v2.0: Ativar autenticação e proteção de rotas com Supabase SSR.
  */
-export async function middleware(_request: NextRequest) {
+export async function proxy(_request: NextRequest) {
   // TODO v2.0: Descomentar a linha abaixo para ativar renovação automática de cookies:
   // return await updateSession(_request);
 

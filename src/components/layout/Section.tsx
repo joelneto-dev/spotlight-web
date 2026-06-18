@@ -13,9 +13,9 @@ export function Section({ id, className, children, as: Component = "section" }: 
     <Component
       id={id}
       aria-labelledby={id ? `${id}-title` : undefined}
-      className={cn("section-base relative mx-auto w-full max-w-7xl overflow-hidden", className)}
+      className={cn("section-base relative w-full", className)}
     >
-      {children}
+      <div className="mx-auto w-full max-w-7xl">{children}</div>
     </Component>
   );
 }

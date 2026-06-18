@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,6 +16,12 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-display",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const viewport: Viewport = {
   themeColor: "#09090B",
   width: "device-width",
@@ -25,7 +31,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://spotlight.com.br"),
   title: {
-    default: "Spotlight — Descubra seu próximo filme favorito",
+    default: "Spotlight - Descubra seu próximo filme favorito",
     template: "%s | Spotlight",
   },
   description:
@@ -46,26 +52,26 @@ export const metadata: Metadata = {
     { name: "Luan Henrique Ferreira" },
     { name: "Miguel Vinhado" },
   ],
-  creator: "Equipe Spotlight — COTIL/UNICAMP 2026",
+  creator: "Equipe Spotlight - COTIL/UNICAMP 2026",
   openGraph: {
     type: "website",
     locale: "pt_BR",
     url: "https://spotlight.com.br",
     siteName: "Spotlight",
-    title: "Spotlight — Descubra seu próximo filme favorito",
+    title: "Spotlight - Descubra seu próximo filme favorito",
     description: "Descreva o que você quer assistir. A IA encontra o filme perfeito para você.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Spotlight — Sistema de Descoberta de Filmes com IA",
+        alt: "Spotlight - Sistema de Descoberta de Filmes com IA",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Spotlight — Descubra seu próximo filme favorito",
+    title: "Spotlight - Descubra seu próximo filme favorito",
     description: "Descreva o que você quer assistir. A IA encontra o filme perfeito para você.",
     images: ["/og-image.png"],
   },
@@ -95,11 +101,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="pt-BR"
       data-theme="dark"
-      className={`${inter.variable} ${geistMono.variable}`}
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${geistMono.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
       <body className="bg-sp-base flex min-h-screen flex-col antialiased">
-        {/* Skip Link for Accessibility */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-white focus:p-4 focus:text-black"
