@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -9,72 +10,50 @@ interface SpotlightLogoProps {
   size?: number;
   className?: string;
   animated?: boolean;
+  alt?: string;
 }
+
+const iconByVariant = {
+  dark: "/assets/brand/spotlight-icon-light.png",
+  light: "/assets/brand/spotlight-icon-dark.png",
+} as const;
 
 export function SpotlightLogo({
   variant = "dark",
   size = 40,
   className,
   animated = false,
+  alt = "Spotlight",
 }: SpotlightLogoProps) {
-  // dark variant (default): dark background -> outer white, inner black
-  // light variant: light background -> outer black, inner white
-  const outerColor = variant === "dark" ? "#FFFFFF" : "#000000";
-  const innerColor = variant === "dark" ? "#000000" : "#FFFFFF";
+  const src = iconByVariant[variant];
+  const classes = cn("block shrink-0", className);
+  const image = (
+    <Image
+      src={src}
+      width={size}
+      height={size}
+      alt={alt}
+      draggable={false}
+      className="h-full w-full select-none object-contain"
+    />
+  );
 
   if (animated) {
     return (
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 1024 1024"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={cn("select-none", className)}
+      <motion.span
+        className={classes}
+        style={{ width: size, height: size }}
+        animate={{ scale: [1, 1.06, 1], opacity: [0.92, 1, 0.92] }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       >
-        <motion.circle
-          cx="512"
-          cy="512"
-          r="420"
-          fill={outerColor}
-          initial={{ scale: 0.9, opacity: 0.8 }}
-          animate={{ scale: 1.0, opacity: 1 }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          }}
-        />
-        <motion.circle
-          cx="512"
-          cy="512"
-          r="170"
-          fill={innerColor}
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 0.9 }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          }}
-        />
-      </svg>
+        {image}
+      </motion.span>
     );
   }
 
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 1024 1024"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={cn("select-none", className)}
-    >
-      <circle cx="512" cy="512" r="420" fill={outerColor} />
-      <circle cx="512" cy="512" r="170" fill={innerColor} />
-    </svg>
-  );
+  return <span className={classes}>{image}</span>;
 }
